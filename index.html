@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style scoped>
+        .box {
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        li.fav {
+            background: #ff9ed2;
+        }
+
+        .border {
+            border: solid 2px black;
+        }
+    </style>
+
+    <!-- <title>Document</title> -->
+</head>
+<h1>Hello, Vue :)</h1>
+
+<div id="app">
+    <!-- START PASSING DATA -->
+    <hr>
+
+    <p>{{title}} - {{author}} - {{age}}</p>
+
+    <!-- END PASSING DATA -->
+
+    <!-- START CLICK EVENT -->
+    <hr>
+    <button v-on:click="age++">Increase Age</button>
+    <button v-on:click="age--">Decrease Age</button>
+
+    <!-- <div @click="title = 'something else'">Change Book Title</div> -->
+
+
+    <div @click="changeTitle('goreng ayam')">Change Book Title</div>
+
+    <div v-if="showBooks">
+        <p>{{title}} - {{author}} - {{age}}</p>
+    </div>
+
+    <button @click="toggleShowBooks">
+        <span v-if="showBooks">Hide Books</span>
+        <!-- <span v-if="!showBooks">Show Books</span> -->
+        <span v-else>Show Books</span>
+    </button>
+
+    <div v-show="showBooks">currently showing books</div>
+
+    <!-- END CLICK EVENT -->
+
+    <!-- START MOUSE EVENT -->
+
+    <hr>
+    <div class="box" @mouseover="handleEvent($event ,1)">mouseover/hover (enter)</div>
+    <div class="box" @mouseleave="handleEvent">mouseleave</div>
+    <div class="box" @dblclick="handleEvent">doubleclick</div>
+    <div class="box" @mousemove="handleMouseMove">position - {{x}} - {{y}}</div>
+
+    <!-- END MOUSE EVENT -->
+
+    <!-- START OUTPUTTING LIST -->
+    <hr>
+    <ul>
+        <li v-for="book in books">
+            <img :src="book.img" alt="" srcset="" width="50">
+            <p>{{book.title}}</p>
+            <p>{{book.author}}</p>
+        </li>
+    </ul>
+
+    <!-- END OUTPUTTING LIST -->
+
+    <!-- START ATTRIBUTE BINDING -->
+
+    <hr>
+    <!-- menjadi dinamic dengan property url-->
+    <a v-bind:href="url" target="_blank">ATTRIBUTE BINDING</a>
+    <!-- sama seperti v-bind -->
+    <a :href="url" target="_blank">ATTRIBUTE BINDING</a>
+    <ul>
+        <li v-for="book in books">
+            <img :src="book.img" alt="" srcset="" width="50">
+        </li>
+    </ul>
+
+    <!-- END ATTRIBUTE BINDING -->
+
+
+    <!-- START DYNAMIC CLASSES -->
+    <hr>
+    <ul>
+        <li v-for="book in books" :class="{fav:book.isFav}">
+            <img :src="book.img" alt="" srcset="" width="50">
+        </li>
+    </ul>
+
+    <!-- END DYNAMIC CLASSES -->
+
+    <!-- START TOGGLING FAVS -->
+    <hr>
+    <ul>
+        <li v-for="book in books" :key="book.id" @mouseover="hoverBorder(book)" @mouseleave="removeBorder(book)"
+            :class="{ 'border': book.isHovered }">
+            <img :src="book.img" alt="" srcset="" width="50">
+        </li>
+    </ul>
+
+    <!-- END TOGGLING FAVS -->
+
+    <!-- START COMPUTED PROPERTY -->
+    <hr>
+    <p>asdf</p>
+    <ul>
+        <li v-for="book in filteredBooks">
+            <h3>
+                {{ book.title}}
+            </h3>
+        </li>
+    </ul>
+
+    <!-- END COMPUTED PROPERTY -->
+</div>
+
+<script src="app.js"></script>
+
+<body>
+
+</body>
+
+</html>
